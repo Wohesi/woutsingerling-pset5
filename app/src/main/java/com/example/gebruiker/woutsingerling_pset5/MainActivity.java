@@ -13,6 +13,7 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity {
 
     private RestoDatabase db;
+    private RestoAdapter adapter;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -42,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
 
         db = RestoDatabase.getInstance(getApplicationContext());
         Cursor cursor = db.selectAll();
+
+        adapter = new RestoAdapter(getApplicationContext(), cursor);
+
 
         FragmentManager fm = getSupportFragmentManager();
         CategoriesFragment fragment = new CategoriesFragment();

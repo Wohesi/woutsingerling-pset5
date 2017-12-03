@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -30,12 +31,16 @@ import java.util.ArrayList;
  */
 public class MenuFragment extends ListFragment {
 
-    // global array list
+    // global variables
     ArrayList<String> list = new ArrayList<String>();
+    ArrayList<Double> prices = new ArrayList<Double>();
+    private RestoDatabase db;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        db = RestoDatabase.getInstance(getContext());
 
         Bundle arguments = this.getArguments();
         final String receivedcategory = arguments.getString("category");
@@ -71,8 +76,9 @@ public class MenuFragment extends ListFragment {
                         for (int i=0; i<jsonArray.length(); i++) {
                             try {
                                 if (jsonArray.getJSONObject(i).optString("category").equals(receivedcategory)) {
-                                    list.add(jsonArray.getJSONObject(i)
-                                            .optString("name"));
+                                    //list.add(jsonArray.getJSONObject(i).optString("name") +"     $" + jsonArray.getJSONObject(i).optString("price") );
+                                    list.add(jsonArray.getJSONObject(i).optString("name"));
+                                    prices.add(jsonArray.getJSONObject(i).optDouble("price"));
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -119,6 +125,12 @@ public class MenuFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
 
+        list.get((int)id);
+
+        String ItemPicked = "You added " +  list.get((int)id) + " to your order";
+        Toast.makeText(getContext(),ItemPicked, Toast.LENGTH_SHORT).show();
+
+        db.addItem(list.get((int)id), prices.get((int)id), 0, id);
 
     }
 }

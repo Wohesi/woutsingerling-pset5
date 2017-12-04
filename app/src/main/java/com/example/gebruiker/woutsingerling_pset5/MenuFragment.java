@@ -118,7 +118,7 @@ public class MenuFragment extends ListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.manu_fragment, container, false);
     }
 
@@ -126,12 +126,7 @@ public class MenuFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
 
-        list.get((int)id);
-
-        //String ItemPicked = "You added " +  list.get((int)id) + " to your order";
-        //Toast.makeText(getContext(),ItemPicked, Toast.LENGTH_SHORT).show();
-
-        String ItemPicked = list.get((int)id) + prices.get((int)id) + 0 + id;
+        String ItemPicked = list.get((int)id);
         Toast.makeText(getContext(), ItemPicked, Toast.LENGTH_SHORT).show();
 
         db.addItem(list.get((int)id), prices.get((int)id),  id);

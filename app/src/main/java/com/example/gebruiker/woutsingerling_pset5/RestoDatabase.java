@@ -49,10 +49,7 @@ public class RestoDatabase extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues cv = new ContentValues();
 
-        System.out.println(cv + "TESTTTTTTTT");
-
         // get the amount
-
          if ( db.rawQuery("SELECT amount FROM orders WHERE _id = "+ id, null).moveToFirst()) {
              db.execSQL("UPDATE orders SET amount = amount + 1 WHERE _id =" + id);
         } else {
@@ -61,11 +58,8 @@ public class RestoDatabase extends SQLiteOpenHelper {
              cv.put("price", price);
              cv.put("amount", 1);
 
-//        System.out.println(cv + "TESTTTTTTTT");
-
              db.insert("orders", "null", cv);
          }
-        //amount = cursor.getInt(cursor.getColumnIndex("amount"));
 
     }
 
@@ -73,6 +67,5 @@ public class RestoDatabase extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         db.execSQL("DROP TABLE IF EXISTS" + " orders");
         onCreate(db);
-
     }
 }

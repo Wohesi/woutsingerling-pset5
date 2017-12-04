@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new RestoAdapter(getApplicationContext(), cursor);
 
-
         FragmentManager fm = getSupportFragmentManager();
         CategoriesFragment fragment = new CategoriesFragment();
         FragmentTransaction ft = fm.beginTransaction();

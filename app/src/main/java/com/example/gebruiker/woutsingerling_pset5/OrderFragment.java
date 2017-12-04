@@ -31,7 +31,6 @@ import java.util.List;
  */
 
 public class OrderFragment extends DialogFragment implements View.OnClickListener {
-//public class OrderFragment extends DialogFragment {
 
     private RestoDatabase db;
     private RestoAdapter adapter;
@@ -51,7 +50,6 @@ public class OrderFragment extends DialogFragment implements View.OnClickListene
         adapter = new RestoAdapter(getContext(), cursor);
         listView.setAdapter(adapter);
     }
-
 
 
     @Nullable
@@ -79,7 +77,6 @@ public class OrderFragment extends DialogFragment implements View.OnClickListene
                 
                 Toast.makeText(getContext(),"You canceled your order", Toast.LENGTH_LONG);
 
-                //db.clear();
                 this.dismiss();
                 break;
 

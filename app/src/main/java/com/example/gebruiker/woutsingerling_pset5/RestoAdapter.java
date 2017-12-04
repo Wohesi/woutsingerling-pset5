@@ -28,7 +28,7 @@ public class RestoAdapter extends ResourceCursorAdapter {
         price.setText(cursor.getString(cursor.getColumnIndex("price")));
 
         // set amount
-        TextView amount = view.findViewById(R.id.price);
+        TextView amount = view.findViewById(R.id.amount);
         amount.setText(cursor.getString(cursor.getColumnIndex("amount")));
     }
 }

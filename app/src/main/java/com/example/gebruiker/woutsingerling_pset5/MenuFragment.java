@@ -126,7 +126,7 @@ public class MenuFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
 
-        String ItemPicked = list.get((int)id);
+        String ItemPicked = list.get((int)id) + "added to your oder";
         Toast.makeText(getContext(), ItemPicked, Toast.LENGTH_SHORT).show();
 
         db.addItem(list.get((int)id), prices.get((int)id),  id);

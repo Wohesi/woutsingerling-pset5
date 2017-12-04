@@ -9,16 +9,22 @@
         android:id="@+id/dialog_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.999999">
+        android:layout_weight="1">
 
     </ListView>
 
+    <TextView
+        android:id="@+id/total"
+        android:layout_width="328dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.00001"
+        android:text="TextView" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_weight="0.000001">
+        android:layout_weight="0.000001"
+        android:orientation="horizontal">
 
 
         <Button
@@ -26,21 +32,21 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Place order"/>
+            android:text="Place order" />
 
         <Button
             android:id="@+id/clear_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Clear order"/>
+            android:text="Clear order" />
 
         <Button
             android:id="@+id/cancel_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Cancel order"/>
+            android:text="Cancel order" />
 
     </LinearLayout>
 

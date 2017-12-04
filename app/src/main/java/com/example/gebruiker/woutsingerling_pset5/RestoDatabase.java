@@ -5,13 +5,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 /**
  * Created by Wout on 27-11-2017.
  */
 
 public class RestoDatabase extends SQLiteOpenHelper {
+
+    SQLiteDatabase db = this.getReadableDatabase();
 
     // Constuctor
     private RestoDatabase(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -64,8 +65,9 @@ public class RestoDatabase extends SQLiteOpenHelper {
     }
 
     public void clear() {
-        SQLiteDatabase db = this.getReadableDatabase();
+        db = this.getReadableDatabase();
         db.execSQL("DROP TABLE IF EXISTS" + " orders");
         onCreate(db);
     }
+
 }

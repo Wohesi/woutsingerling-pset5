@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -35,6 +36,21 @@ public class OrderFragment extends DialogFragment implements View.OnClickListene
     private RestoDatabase db;
     private RestoAdapter adapter;
 
+    public String totalItems() {
+
+        int TotalPrice = 0;
+        Cursor cursor = db.selectAll();
+        // https://stackoverflow.com/questions/10723770/whats-the-best-way-to-iterate-an-android-cursor
+        while (cursor.moveToNext()) {
+
+            int price = cursor.getInt(cursor.getColumnIndex("price"));
+            int amount = cursor.getInt(cursor.getColumnIndex("amount"));
+
+            TotalPrice += price * amount;
+        }
+        return Integer.toString(TotalPrice);
+    }
+
     @Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
@@ -42,6 +58,8 @@ public class OrderFragment extends DialogFragment implements View.OnClickListene
         // get al the items from the database
         db = RestoDatabase.getInstance(getContext());
         Cursor cursor = db.selectAll();
+
+
 
         // get the listview
         ListView listView = (ListView) getView().findViewById(R.id.dialog_view);
@@ -56,6 +74,8 @@ public class OrderFragment extends DialogFragment implements View.OnClickListene
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+        db = RestoDatabase.getInstance(getContext());
+
         View view = inflater.inflate(R.layout.order_fragment, container, false);
 
         Button b = (Button) view.findViewById(R.id.cancel_button);
@@ -66,6 +86,10 @@ public class OrderFragment extends DialogFragment implements View.OnClickListene
 
         Button o = (Button) view.findViewById(R.id.order_button);
         o.setOnClickListener(this);
+
+        // total items
+        TextView total = (TextView) view.findViewById(R.id.total);
+        total.setText(totalItems());
 
         return view;
     }

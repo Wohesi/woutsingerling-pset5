@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:layout_marginTop="5dp"
-        android:text="TextView" />
+        android:text="The price should be here" />
 
     <TextView
         android:id="@+id/amount"
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:layout_marginTop="5dp"
-        android:text="TextView" />
+        android:text="amount here" />
 
 
 </LinearLayout>

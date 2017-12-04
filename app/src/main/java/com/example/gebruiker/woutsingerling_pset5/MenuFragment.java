@@ -1,6 +1,7 @@
 package com.example.gebruiker.woutsingerling_pset5;
 
 
+import android.content.ClipData;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.Nullable;
@@ -127,10 +128,13 @@ public class MenuFragment extends ListFragment {
 
         list.get((int)id);
 
-        String ItemPicked = "You added " +  list.get((int)id) + " to your order";
-        Toast.makeText(getContext(),ItemPicked, Toast.LENGTH_SHORT).show();
+        //String ItemPicked = "You added " +  list.get((int)id) + " to your order";
+        //Toast.makeText(getContext(),ItemPicked, Toast.LENGTH_SHORT).show();
 
-        db.addItem(list.get((int)id), prices.get((int)id), 0, id);
+        String ItemPicked = list.get((int)id) + prices.get((int)id) + 0 + id;
+        Toast.makeText(getContext(), ItemPicked, Toast.LENGTH_SHORT).show();
+
+        db.addItem(list.get((int)id), prices.get((int)id),  id);
 
     }
 }

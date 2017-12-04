@@ -45,33 +45,34 @@ public class RestoDatabase extends SQLiteOpenHelper {
         return getWritableDatabase().rawQuery("SELECT * FROM orders", null);
     }
 
-    public void addItem(String name, double price, int amount, long id) {
+    public void addItem(String name, double price, long id) {
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues cv = new ContentValues();
 
+        System.out.println(cv + "TESTTTTTTTT");
+
         // get the amount
-        Cursor cursor = db.rawQuery("SELECT amount FROM orders WHERE _id = "+ id, null);
-        amount = cursor.getInt(cursor.getColumnIndex("amount"));
 
-        if (amount == 0 ) {
-            amount += 1;
+         if ( db.rawQuery("SELECT amount FROM orders WHERE _id = "+ id, null).moveToFirst()) {
+             db.execSQL("UPDATE orders SET amount = amount + 1 WHERE _id =" + id);
         } else {
-            amount += 1;
-        }
+             cv.put("name", name);
+             cv.put("_id", id);
+             cv.put("price", price);
+             cv.put("amount", 1);
 
-        cv.put("name", name);
-        cv.put("_id", id);
-        cv.put("price", price);
-        cv.put("amount", amount);
+//        System.out.println(cv + "TESTTTTTTTT");
 
-        db.insert("orders", "null", cv);
+             db.insert("orders", "null", cv);
+         }
+        //amount = cursor.getInt(cursor.getColumnIndex("amount"));
 
-        //
-        System.out.println("TESTTTTTTT" + db.insert("orders", "null", cv));
     }
 
     public void clear() {
         SQLiteDatabase db = this.getReadableDatabase();
-        db.execSQL("DROP IF TABLE EXISTS" + "orders");
+        db.execSQL("DROP TABLE IF EXISTS" + " orders");
+        onCreate(db);
+
     }
 }

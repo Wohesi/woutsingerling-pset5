@@ -20,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -43,9 +44,6 @@ public class OrderFragment extends DialogFragment implements View.OnClickListene
         db = RestoDatabase.getInstance(getContext());
         Cursor cursor = db.selectAll();
 
-        // Cursor count = 0;
-        Log.d("Test!!!!!", "onViewStateRestored: " + cursor.getCount());
-
         // get the listview
         ListView listView = (ListView) getView().findViewById(R.id.dialog_view);
 
@@ -65,6 +63,8 @@ public class OrderFragment extends DialogFragment implements View.OnClickListene
         Button b = (Button) view.findViewById(R.id.cancel_button);
         b.setOnClickListener(this);
 
+        Button c = (Button) view.findViewById(R.id.clear_button);
+        c.setOnClickListener(this);
 
         Button o = (Button) view.findViewById(R.id.order_button);
         o.setOnClickListener(this);
@@ -77,9 +77,18 @@ public class OrderFragment extends DialogFragment implements View.OnClickListene
         switch (view.getId()) {
             case R.id.cancel_button:
                 
+                Toast.makeText(getContext(),"You canceled your order", Toast.LENGTH_LONG);
+
+                //db.clear();
+                this.dismiss();
+                break;
+
+            case R.id.clear_button:
+
                 Toast.makeText(getContext(),"You deleted your order", Toast.LENGTH_LONG);
 
                 db.clear();
+                this.dismiss();
                 break;
 
             case  R.id.order_button:
@@ -93,9 +102,14 @@ public class OrderFragment extends DialogFragment implements View.OnClickListene
                             @Override
                             public void onResponse(JSONObject response) {
 
-                                String toast = response.toString();
+                                String toast = null;
+                                try {
+                                    toast = response.getString("preparation_time");
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
 
-                                Toast.makeText(getContext(), toast, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "Your waiting time is: "+toast+" minutes.", Toast.LENGTH_SHORT).show();
                             }
                         }, new Response.ErrorListener() {
 

@@ -29,6 +29,13 @@
             android:text="Place order"/>
 
         <Button
+            android:id="@+id/clear_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Clear order"/>
+
+        <Button
             android:id="@+id/cancel_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
